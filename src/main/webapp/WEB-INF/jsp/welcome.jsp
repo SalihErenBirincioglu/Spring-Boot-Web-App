@@ -1,9 +1,12 @@
 <html>
-<head>
-    <title> Welcome to JSP page</title>
-</head>
-<body>
-<div>welcome ${name}, your password is ${password} </div>
-<a href="http://localhost:8081/list-todos">See Todos</a>
-</body>
+    <head>
+        <title> Welcome to JSP page</title>
+    </head>
+    <body>
+    <div class ="container">
+        <h1>welcome ${name}, your password is ${password} </h1>
+        <hr>
+        <a href="list-todos">Manage your todos</a>
+    </div>
+    </body>
 </html>

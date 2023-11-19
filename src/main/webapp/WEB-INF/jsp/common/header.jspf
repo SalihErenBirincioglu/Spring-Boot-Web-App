@@ -7,4 +7,4 @@
     <link href="webjars/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.standalone.min.css" rel="stylesheet" >
     <title> Add Todos </title>
 </head>
-<body>
+<body style='background-color:#daf4f0;'>

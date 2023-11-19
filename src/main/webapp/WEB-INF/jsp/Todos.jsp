@@ -18,9 +18,10 @@
         <input type = "submit" class="btn btn-success"/>
     </form:form>
 </div>
+<%@ include file="common/footer.jspf" %>
+<script src="webjars/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript">
     $('#targetDate').datepicker({
         format: 'yyyy-mm-dd'
     });
 </script>
-<%@ include file="common/footer.jspf" %>

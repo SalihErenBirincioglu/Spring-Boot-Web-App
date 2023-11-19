@@ -5,7 +5,6 @@
     <table class="table">
         <thead>
         <tr>
-            <th>id</th>
             <th>Description</th>
             <th>Target Date</th>
             <th>Is Done?</th>

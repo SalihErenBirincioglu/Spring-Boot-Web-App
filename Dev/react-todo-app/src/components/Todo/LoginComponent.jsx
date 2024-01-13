@@ -1,17 +1,18 @@
-
 import { useState } from 'react'
 import {useNavigate} from 'react-router-dom'
+import { useAuth } from '../Security/AuthContext'
+
 function LoginComponent() {
 
     const [username, setUsername] = useState('SalihEren')
 
     const [password, setPassword] = useState('')
 
-    const [showSuccessMessage, setShowSuccessMessage] = useState(false)
-
     const [showErrorMessage, setShowErrorMessage] = useState(false)
 
-    const navigator = useNavigate();  
+    const navigate = useNavigate()
+
+    const authContext = useAuth()
 
     function handleUsernameChange(event) {
         setUsername(event.target.value)
@@ -22,24 +23,18 @@ function LoginComponent() {
     }
 
     function handleSubmit() {
-        if(username==='SalihEren' && password==='test123'){
-            console.log('Success')
-            setShowSuccessMessage(true)
-            setShowErrorMessage(false)
-            navigator(`/welcome/${username}`)
+        if(authContext.login(username, password)){
+            navigate(`/welcome/${username}`)
         } else {
-            console.log('Failed')
-            setShowSuccessMessage(false)
             setShowErrorMessage(true)
         }
     }
 
-
     return (
         <div className="Login">
-            <h1>You should login first</h1>
-            {showSuccessMessage && <div className="successMessage">Authenticated Successfully</div>}
-            {showErrorMessage && <div className="errorMessage">Authentication Failed. Please check your credentials.</div>}
+            <h1>Time to Login!</h1>
+            {showErrorMessage && <div className="errorMessage">Authentication Failed. 
+                                                            Please check your credentials.</div>}
             <div className="LoginForm">
                 <div>
                     <label>User Name:</label>
@@ -56,6 +51,5 @@ function LoginComponent() {
         </div>
     )
 }
-
 
 export default LoginComponent

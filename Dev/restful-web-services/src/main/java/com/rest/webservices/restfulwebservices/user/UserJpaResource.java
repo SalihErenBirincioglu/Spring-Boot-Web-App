@@ -8,7 +8,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
-
+//This class does the API calls through JPA. It doesnt use DaoService.
 @RestController
 public class UserJpaResource {
     UserDaoService userDaoService;

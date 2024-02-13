@@ -11,6 +11,10 @@ public class TodoResource {
 
     private TodoService todoService;
 
+    @GetMapping(path = "/basicauth")
+    public String basicAuthCheck() {
+        return "Success";
+    }
     public TodoResource(TodoService todoService){
         this.todoService= todoService;
     }
@@ -29,6 +33,18 @@ public class TodoResource {
     public ResponseEntity<Void> deleteTodo(@PathVariable String username, @PathVariable int id){
         todoService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/users/{username}/todos/{id}")
+    public Todo updateTodo(@PathVariable String username, @PathVariable int id, @RequestBody Todo todo){
+        todoService.updateTodo(todo);
+        return todo;
+    }
+
+    @PostMapping("/users/{username}/todos")
+    public Todo createTodo(@PathVariable String username, @RequestBody Todo todo){
+        Todo createdTodo = todoService.addTodo(username,todo.getDescription(),todo.getTargetDate(),todo.isDone());
+        return createdTodo;
     }
 
 }

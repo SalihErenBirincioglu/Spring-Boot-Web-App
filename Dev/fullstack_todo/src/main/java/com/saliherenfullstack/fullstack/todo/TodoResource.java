@@ -18,6 +18,7 @@ public class TodoResource {
     public TodoResource(TodoService todoService){
         this.todoService= todoService;
     }
+
     @GetMapping("/users/{username}/todos")
     public List<Todo> retrieveTodos(@PathVariable String username){
         return todoService.findByUsername(username);

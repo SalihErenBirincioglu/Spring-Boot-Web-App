@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { apiClient } from "../Todo/api/ApiClient";
-import { executeBasicAuthenticationService } from "../Todo/api/TodoApiService";
+import { executeBasicAuthenticationService } from "../Todo/api/AuthenticationApiService";
+import { executeJwtAuthenticationService } from "../Todo/api/AuthenticationApiService";
 
 //1: Create a Context
 export const AuthContext = createContext()
@@ -28,7 +29,7 @@ export default function AuthProvider({ children }) {
             setUsername(null)
             return false
         }        
-    } */
+    } 
 
     async function login(username, password) {
         
@@ -44,6 +45,37 @@ export default function AuthProvider({ children }) {
                 config => {
                     console.log('intercepting and adding a token')
                     config.headers.Authorization = baToken
+                    return config
+                }
+            ) 
+
+            return true
+        }
+        else{
+            logout()
+            return false
+        }
+    }
+    catch(error){
+        logout()
+        return false
+    }
+    } */
+
+    async function login(username, password) {
+        
+        try{
+        const response = await executeJwtAuthenticationService(username,password)
+        
+        if(response.status == 200){
+            const jwtToken = 'Bearer ' + response.data.token
+            setAuthenticated(true)
+            setUsername(username)
+            setToken(jwtToken)
+            apiClient.interceptors.request.use(
+                config => {
+                    console.log('intercepting and adding a token')
+                    config.headers.Authorization = jwtToken
                     return config
                 }
             ) 
